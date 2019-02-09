@@ -1,18 +1,18 @@
 # YuCorrectMaya
 
-## Objectif
+## Goal
 
-L’objectif de ce projet est de développer des ressources pour la traduction automatique de la langue Maya Yucatèque.
+The objective of this project is to develop resources for the automatic translation of the Maya Yucatec language.
 
-Cela se décline sous trois étapes :
+This comes in three stages:
 
-1. Développement d'une application de validation d’un corpus comparable : cette dernière permettra aux chercheurs du LIPN d'importer/valider/corriger des corpus comparables existants dans cette langue, qui permettra d'alimenter notre BDD.
+1. Development of a validation application for a comparable corpus : the latter will allow the LIPN researchers to import / validate / corrected comparable corpora existing in this language, which will feed our database.
 
-2. Mise en marche d’un module déjà développé (mais incomplet) d’OCR (optical character recognition): il permettra d'exploiter des photos (prises ou importées) contenants du texte
+2. Starting an already developed (but incomplete) optical character recognition (OCR) module: it will exploit photos (taken or imported) containing text
 
-3. Adaptation du traducteur Wixarika au Maya Yucatèque: traducteur Wixarika/Espagnol existant auquel on souhaite ajouter une version Maya/Espagnol avec les ressources rapatriées par OCR.
+3. Adaptation of the Wixarika translator to Maya Yucatec: existing Wixarika / Spanish translator to whom we wish to add a Maya / Spanish version with the resources repatriated by OCR. (This stage of the project is optional)
 
-## Membres de l'équipe :
+## Team Membres :
 * Name: Heba Kaddouh [Hebakaddouh](https://github.com/Hebakaddouh)
 	  
 * Name: Maroi Labiodh [marwaLabiodh](https://github.com/marwaLabiodh)
