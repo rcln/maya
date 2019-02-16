@@ -12,7 +12,7 @@ This comes in three stages:
 
 3. Adaptation of the Wixarika translator to Maya Yucatec: existing Wixarika / Spanish translator to whom we wish to add a Maya / Spanish version with the resources repatriated by OCR. (This stage of the project is optional)
 
-## Team Membres :
+## Team Members :
 * Name: Heba Kaddouh [Hebakaddouh](https://github.com/Hebakaddouh)
 	  
 * Name: Maroi Labiodh [marwaLabiodh](https://github.com/marwaLabiodh)
