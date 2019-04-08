@@ -52,8 +52,10 @@
         <v-layout justify-center align-center>
           <v-flex shrink>
             <div id="app">
-              <textarea white rows="10" v-model="text"></textarea>
-              <br>
+              <div v-for="t in text" v-bind:key="t.id">
+                <p>{{t.espa}}</p>
+                <br>
+              </div>
               <text-reader @load="text = $event"></text-reader>
 
             </div>
