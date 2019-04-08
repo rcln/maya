@@ -19,7 +19,7 @@
         </v-flex>
         <v-flex px-1 my-0 xs4>
           <v-card-text>
-            <p class="text-xs-center black--text">Espagnol</p>
+            <p class="text-xs-center black--text">Spanish</p>
           </v-card-text>
         </v-flex>
         <v-flex px-1 my-0 xs4>
@@ -30,27 +30,27 @@
       </v-layout>
     </v-container>
     <v-container id="scroll-target" style="max-height: 400px" class="scroll-y" mt-0>
-      <v-layout row  style="height: 100px" v-for="(ligne,index) in lignes" v-bind:key="ligne.id">
+      <v-layout row  style="height: 100px" v-for="t in text" v-bind:key="t.id">
         <v-flex px-1 my-0 xs4>
           <v-card class="white">
           <v-card-text>
-            <p v-show="ligne.value == 'V'" class="text-xs-center black--text" style="font-size:17px;height:28px;">{{ ligne.maya }}</p>
-            <v-text-field v-model="ligne.maya" v-show="ligne.value == 'C'" label="Solo" solo ></v-text-field>
+            <p v-show="t.value == 'V'" class="text-xs-center black--text" style="font-size:17px;height:28px;">{{ t.maya }}</p>
+            <v-text-field v-model="t.maya" v-show="t.value == 'C'" label="Maya" solo placeholder="Maya"></v-text-field>
           </v-card-text>
           </v-card>
         </v-flex>
         <v-flex px-1 my-0 xs4>
           <v-card class="white">
           <v-card-text>
-            <p v-show="ligne.value == 'V'" class="text-xs-center black--text" style="font-size:17px;height:28px;">{{ ligne.espa }}</p>
-            <v-text-field v-model="ligne.espa" v-show="ligne.value == 'C'" label="Solo" solo ></v-text-field>
+            <p v-show="t.value == 'V'" class="text-xs-center black--text" style="font-size:17px;height:28px;">{{ t.espa }}</p>
+            <v-text-field v-model="t.espa" v-show="t.value == 'C'" label="Spanish" solo placeholder="Spanish"></v-text-field>
           </v-card-text>
           </v-card>
         </v-flex>
         <v-flex px-1 my-0 xs4>
           <v-card class="white">
           <v-card-text>
-            <v-radio-group v-model="ligne.value" row light height="0px">
+            <v-radio-group v-model="t.value" row light height="0px">
               <p>
                 <v-radio value="V" color="green">
                   <div slot="label" class="black--text">Validate</div>
@@ -62,12 +62,12 @@
               </v-radio>
               </p>
               <p>
-                <v-btn icon small >
+                <v-btn icon small v-on:click="addLine">
                   <v-icon >fas fa-plus</v-icon>
                 </v-btn>
               </p>
               <p>
-                <v-btn icon  small v-on:click="ligne.splice(index,1)" >
+                <v-btn icon  small v-on:click="text.splice(index,1)" >
                   <v-icon >far fa-trash-alt</v-icon>
                 </v-btn>
               </p>
@@ -76,6 +76,7 @@
           </v-card>
         </v-flex>
       </v-layout>
+      
     </v-container>
     <v-layout>
       <v-dialog v-model="dialog" persistent max-width="290">
@@ -103,12 +104,12 @@
             </v-radio-group>
             <p v-show="langue == 'M' && f == 'S'">
               <label>Corpus maya
-                <input type="file" id="fileSM" ref="file" v-on:change="handleFileUpload()"/>
+                 <text-reader @load="text = $event"></text-reader>
               </label>
             </p>
             <p v-show="langue == 'E' && f == 'S'">
               <label>Corpus espagnol
-                <input type="file" id="fileSE" ref="file" v-on:change="handleFileUpload()"/>
+                 <text-reader @load="text = $event"></text-reader>
               </label>
             </p>
           </v-card-text>
@@ -126,10 +127,10 @@
 </template>
 
 <script>
-
+import TextReader from "../../TextReader";
 export default {
-	data () {
-		return {
+	data: () => ({
+      dialog: false,
 			open: ['Corpus'],
       files: {
         txt: 'mdi-file-document-outline',
@@ -144,38 +145,41 @@ export default {
             file: 'txt'
           },
           {
-            name: 'corpus Espagnol',
+            name: 'corpus Spanish',
             file: 'txt'
           }]
         }]
       }],
       f : 'P',
       langue : 'E',
-      lignes: [
-        {id:'1', maya:'Maya',espa:'Espagnol', value: 'V'},
-        {id:'2', maya:'Maya',espa:'Espagnol', value: 'V'},
-        {id:'3', maya:'Maya',espa:'Espagnol', value: 'V'},
-        {id:'4', maya:'Maya',espa:'Espagnol', value: 'V'},
-        {id:'5', maya:'Maya',espa:'Espagnol', value: 'V'},
-        {id:'6', maya:'Maya',espa:'Espagnol', value: 'V'},
-        {id:'7', maya:'Maya',espa:'Espagnol', value: 'V'}
+      lines: [
+        {id:'1', maya:'Maya',espa:'Spanish', value: 'V'},
+        {id:'2', maya:'Maya',espa:'Spanish', value: 'V'},
+        {id:'3', maya:'Maya',espa:'Spanish', value: 'V'},
+        {id:'4', maya:'Maya',espa:'Spanish', value: 'V'},
+        {id:'5', maya:'Maya',espa:'Spanish', value: 'V'},
+        {id:'6', maya:'Maya',espa:'Spanish', value: 'V'},
+        {id:'7', maya:'Maya',espa:'Spanish', value: 'V'}
       ],
-      methods: {
-        handleFileUpload(){
-          this.file = this.$refs.file.files[0];
-        },
-        loadTextFromFile(ev) {
-          const file = ev.target.files[0];
-          const reader = new FileReader();
-          reader.onload = e => this.$emit("load", e.target.result);
-          reader.readAsText(file);
-        }
-      },
+      linetextM: '',
+      linetextE: '',
+      lineid: 8,
       loadTextFromFile : '',
       file: '',
-      text: "",
+      text: '',
+
+  }),
+  methods: {
+    addLine: function() {
+
+      this.lines.push({id: this.lineid++, maya: this.linetextM, espa: this.linetextE, value: 'V' });
+
     }
+  },
+  components: {
+    TextReader
   }
+
 }
 
 
