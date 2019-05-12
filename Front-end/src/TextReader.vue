@@ -25,7 +25,7 @@ export default {
           console.log(Textlines);
 
           for(var i = 0; i < Textlines.length; i++){
-            Tablines.push({ id: lineId++, espa: Textlines[i], maya: 'maya', value: 'V' });
+            Tablines.push({ id: lineId++, maya: Textlines[i], espa: 'maya', value: 'V' });
           }
          
           this.$emit("load",Tablines);

@@ -51,14 +51,7 @@
       <v-container fluid fill-width class="black">
         <v-layout justify-center align-center>
           <v-flex shrink>
-            <div id="app">
-              <div v-for="t in text" v-bind:key="t.id">
-                <p>{{t.espa}}</p>
-                <br>
-              </div>
-              <text-reader @load="text = $event"></text-reader>
-
-            </div>
+           
             <p class="dark text-xs-center display-3">Help</p>
             <p class="text-xs-center">The user can import a corpus</p>
             <p class="text-xs-center">The user can add a line by clicking "add"</p>
@@ -78,14 +71,13 @@
 </template>
 
 <script>
-import TextReader from "./TextReader";
 export default {
 	data: () =>
 		({
 			sideNav : false,
       dialog: false,
       menuItems : [
-        { icon: 'fas fa-user-friends', title: 'Profile', link: '/profil'},
+        //{ icon: 'fas fa-user-friends', title: 'Profile', link: '/profil'},
 				{ icon: 'lock_open', title: 'Sign in', link: '/'},
 				{ icon: 'lock_open', title: 'Interface', link: '/Interface'},
 				{ icon: 'lock_open', title: 'Sign up', link: '/SignUp'}
@@ -103,9 +95,7 @@ export default {
       text: "",
 
     }),
-    components: {
-    TextReader
-  }
+    
   }
 
 
