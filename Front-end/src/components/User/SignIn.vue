@@ -1,27 +1,48 @@
 <template>
   <v-container fluid fill-width color="white">
-    <p>Sign in page</p>
-      <form>
-      <v-text-field
-        v-model="email"
-        v-validate="'required|email'"
-        :error-messages="errors.collect('email')"
-        label="E-mail"
-        data-vv-name="email"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="pwd"
-        v-validate="'required|pwd'"
-        :items="items"
-        :error-messages="errors.collect('pwd')"
-        label="Password"
-        data-vv-name="pwd"
-        type="password"
-        required
-      ></v-text-field>
-      <v-btn @click="submit">submit</v-btn>
-    </form>
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card>
+          <v-card-text>
+            <v-container>
+                  <form>
+                     <v-layout row>
+                      <v-flex xs12>
+                      
+                        <v-text-field
+                          v-model="email"
+                          v-validate="'required|email'"
+                          :error-messages="errors.collect('email')"
+                          label="E-mail"
+                          data-vv-name="email"
+                          required
+                        ></v-text-field>
+                      </v-flex>
+                    </v-layout>
+                    <v-layout row>
+                      <v-flex xs12>
+                        <v-text-field
+                          v-model="pwd"
+                          v-validate="'required|pwd'"
+                          :error-messages="errors.collect('pwd')"
+                          label="Password"
+                          data-vv-name="pwd"
+                          type="password"
+                          required
+                        ></v-text-field>
+                      </v-flex>
+                    </v-layout>
+                    <v-layout row>
+                      <v-flex xs12>
+                        <v-btn @click="submit">submit</v-btn>
+                      </v-flex>
+                  </v-layout>
+                </form>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
   </v-container>
 </template>
 

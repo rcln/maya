@@ -9,6 +9,28 @@
                 <v-layout row>
                   <v-flex xs12>
                     <v-text-field
+                      name="name"
+                      label="Name"
+                      id="name"
+                      v-model="name"
+                      type="text"
+                      required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field
+                      name="fname"
+                      label="First Name"
+                      id="fname"
+                      v-model="fname"
+                      type="text"
+                      required></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-text-field
                       name="email"
                       label="Mail"
                       id="email"
@@ -57,6 +79,8 @@
   export default {
     data () {
       return {
+        name:'',
+        fname:'',
         email:'',
         password:'',
         ConfirmPassword:''
