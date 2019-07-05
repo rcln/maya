@@ -1,34 +1,40 @@
 var express=require("express");
 var bodyParser=require('body-parser');
-//var cors=require('cors'); 
-
 var connection = require('./config');
-var app = express();
- 
-var authenticateController=require('./controllers/auth-controller');
-var registerController=require('./controllers/register-controller');
-var corpusController=require('./controllers/corpus-controller');
-var lineController=require('./controllers/line-controller');
+const cors = require('cors');
 
+var app = express();
+const { frontendBaseUrl } = require('./app/config');
+
+
+
+
+
+
+
+const port = process.env.PORT || 3000;
+app.listen(port);
+console.log('API server started on: ' + port);
+
+//parsing
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(cors());
-
-/* route to handle login, registration, add corpus and add line */
-app.post('/api/register',registerController.register); /* "/api" can be deleted */
-app.post('/api/authenticate',authenticateController.authenticate);
-app.post('/api/corpus',corpusController.corpus);
-app.delete('/api/deleteCorpus',corpusController.deleteCorpus);
-app.post('/api/line',lineController.line);
- 
-console.log(authenticateController);
-app.post('/controllers/register-controller', registerController.register);
-app.post('/controllers/auth-controller', authenticateController.authenticate);
-app.post('/controllers/corpus-controller', corpusController.corpus);
-app.delete('/controllers/corpus-controller', corpusController.deleteCorpus);
-app.post('/controllers/line-controller', lineController.line);
+app.use(cors({ origin: [frontendBaseUrl], credentials: true }));
 
 
 
-app.listen(3000);
+
+//Routes
+var userRoutes = require('./app/routes/userRoutes');
+var corpusRoutes = require('./app/routes/corpusRoutes');
+var lineRoutes = require('./app/routes/lineRoutes');
+userRoutes(app);
+corpusRoutes(app);
+lineRoutes(app);
+
+module.exports = app;
+
+
+
+
