@@ -14,27 +14,36 @@ module.exports.register=function(req,res){
         "email":req.body.email,
         "password":encryptedString,
     }
-    
-        
-        connection.query('INSERT INTO user SET ?',user, function (error, results, fields) {
-          
-            if (error) {
-              res.json({
-                  status:(400),
-                  message:'there are some error with query'
-              })
-            }
-            else{
-                res.json({
-                  status:true,
-                  data:results,
-                  message:'user registered sucessfully'
-              })
 
-          
+        //on vérifie l'éxistence du mail dans la bdd
+        connection.query('SELECT * from user where email=?',[user.email], function(error, results){
+          //si le mail passé en argument n'existe pas le user peux s'inscrire
+          if (results.length == 0){
+            connection.query('INSERT INTO user SET ?',user, function (error, results, fields) {
+              
+                if (error) {
+                  res.json({
+                      status:(400),
+                      message:'there are some error with query'
+                  })
+                }
+                else{
+                  res.json({
+                      status:(200),
+                      message:'user inserted!'
+                  })
+                }
+            })
           }
-        })
-
+          //sinon un message d'erreur lui sera envoyé
+          else{
+            res.json({
+                      status:(400),
+                      message:'Ce mail existe déjà veillez utiliser un autre!'
+                  })
+          }
+          
+      })
 }
 
 
